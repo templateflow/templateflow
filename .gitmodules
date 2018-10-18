@@ -1,6 +1,6 @@
 [submodule "tpl-fMRIPrep"]
 	path = tpl-fMRIPrep
-	url = ./tpl-fMRIPrep
+	url = https://github.com/templateflow/tpl-fMRIPrep
 [submodule "tpl-MNI152NLin2009cAsym"]
 	path = tpl-MNI152NLin2009cAsym
-	url = ./tpl-MNI152NLin2009cAsym
+	url = https://github.com/templateflow/tpl-MNI152NLin2009cAsym
