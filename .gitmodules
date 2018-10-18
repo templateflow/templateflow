@@ -4,3 +4,6 @@
 [submodule "tpl-MNI152NLin2009cAsym"]
 	path = tpl-MNI152NLin2009cAsym
 	url = ./tpl-MNI152NLin2009cAsym
+[submodule "tpl-MNI152Lin"]
+	path = tpl-MNI152Lin
+	url = ./tpl-MNI152Lin
