@@ -7,3 +7,6 @@
 [submodule "tpl-MNI152Lin"]
 	path = tpl-MNI152Lin
 	url = ./tpl-MNI152Lin
+[submodule "tpl-NKI"]
+	path = tpl-NKI
+	url = ./tpl-NKI
