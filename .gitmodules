@@ -12,7 +12,7 @@
 	url = https://github.com/templateflow/tpl-NKI
 [submodule "tpl-PNC"]
 	path = tpl-PNC
-	url = ./tpl-PNC
+	url = git@github.com:templateflow/tpl-PNC.git
 [submodule "tpl-OASIS30ANTs"]
 	path = tpl-OASIS30ANTs
 	url = git@github.com:templateflow/tpl-OASIS30ANTs.git
