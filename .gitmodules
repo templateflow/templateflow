@@ -10,3 +10,6 @@
 [submodule "tpl-NKI"]
 	path = tpl-NKI
 	url = https://github.com/templateflow/tpl-NKI
+[submodule "tpl-PNC"]
+	path = tpl-PNC
+	url = ./tpl-PNC
