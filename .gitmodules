@@ -16,3 +16,6 @@
 [submodule "tpl-OASIS30ANTs"]
 	path = tpl-OASIS30ANTs
 	url = git@github.com:templateflow/tpl-OASIS30ANTs.git
+[submodule "tpl-fsaverage"]
+	path = tpl-fsaverage
+	url = ./tpl-fsaverage
