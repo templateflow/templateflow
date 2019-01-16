@@ -19,3 +19,6 @@
 [submodule "tpl-fsaverage"]
 	path = tpl-fsaverage
 	url = git@github.com:templateflow/tpl-fsaverage.git
+[submodule "tpl-fsLR"]
+	path = tpl-fsLR
+	url = https://github.com/templateflow/tpl-fsLR.git
