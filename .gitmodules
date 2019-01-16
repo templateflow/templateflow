@@ -12,13 +12,13 @@
 	url = https://github.com/templateflow/tpl-NKI
 [submodule "tpl-PNC"]
 	path = tpl-PNC
-	url = git@github.com:templateflow/tpl-PNC.git
+	url = https://github.com/templateflow/tpl-PNC
 [submodule "tpl-OASIS30ANTs"]
 	path = tpl-OASIS30ANTs
-	url = git@github.com:templateflow/tpl-OASIS30ANTs.git
+	url = https://github.com/templateflow/tpl-OASIS30ANTs
 [submodule "tpl-fsaverage"]
 	path = tpl-fsaverage
-	url = git@github.com:templateflow/tpl-fsaverage.git
+	url = https://github.com/templateflow/tpl-fsaverage
 [submodule "tpl-fsLR"]
 	path = tpl-fsLR
-	url = https://github.com/templateflow/tpl-fsLR.git
+	url = https://github.com/templateflow/tpl-fsLR
