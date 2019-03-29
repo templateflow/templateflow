@@ -21,4 +21,4 @@
 	url = https://github.com/templateflow/tpl-fsLR
 [submodule "tpl-MNI152NLin6Asym"]
 	path = tpl-MNI152NLin6Asym
-	url = ./tpl-MNI152NLin6Asym
+	url = https://github.com/templateflow/tpl-MNI152NLin6Asym
