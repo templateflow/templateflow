@@ -22,3 +22,6 @@
 [submodule "tpl-MNI152NLin6Asym"]
 	path = tpl-MNI152NLin6Asym
 	url = https://github.com/templateflow/tpl-MNI152NLin6Asym
+[submodule "tpl-MNI152NLin6Sym"]
+	path = tpl-MNI152NLin6Sym
+	url = ./tpl-MNI152NLin6Sym
