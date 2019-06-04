@@ -28,3 +28,6 @@
 [submodule "tpl-MNIPediatricAsym"]
 	path = tpl-MNIPediatricAsym
 	url = https://github.com/templateflow/tpl-MNIPediatricAsym
+[submodule "tpl-MNIInfant"]
+	path = tpl-MNIInfant
+	url = ./tpl-MNIInfant
