@@ -27,4 +27,4 @@
 	url = https://github.com/templateflow/tpl-MNI152NLin6Sym
 [submodule "tpl-MNIPediatricAsym"]
 	path = tpl-MNIPediatricAsym
-	url = ./tpl-MNIPediatricAsym
+	url = https://github.com/templateflow/tpl-MNIPediatricAsym
