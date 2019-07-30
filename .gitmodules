@@ -31,3 +31,6 @@
 [submodule "tpl-MNIInfant"]
 	path = tpl-MNIInfant
 	url = https://github.com/templateflow/tpl-MNIInfant
+[submodule "tpl-UNCInfant"]
+	path = tpl-UNCInfant
+	url = ./tpl-UNCInfant
