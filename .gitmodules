@@ -39,4 +39,4 @@
 	url = https://github.com/templateflow/tpl-UNCInfant
 [submodule "tpl-test2"]
 	path = tpl-test2
-	url = ./tpl-test2
+	url = https://github.com/wiheto/
