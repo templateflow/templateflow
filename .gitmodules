@@ -33,4 +33,4 @@
 	url = https://github.com/templateflow/tpl-MNIInfant
 [submodule "tpl-test"]
 	path = tpl-test
-	url = ./tpl-test
+	url = https://github.com/templateflow/tpl-test
