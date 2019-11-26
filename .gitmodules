@@ -34,3 +34,6 @@
 [submodule "tpl-test"]
 	path = tpl-test
 	url = https://github.com/templateflow/tpl-test
+[submodule "tpl-UNCInfant"]
+	path = tpl-UNCInfant
+	url = https://github.com/templateflow/tpl-UNCInfant
