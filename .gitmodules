@@ -36,6 +36,6 @@
 	url = https://github.com/templateflow/tpl-UNCInfant
 [submodule "tpl-WHS"]
 	path = tpl-WHS
-	url = git@github.com:templateflow/tpl-WHS.git
+	url = https://github.com/templateflow/tpl-WHS
 	branch = master
 	datalad-id = 1633db3a-5db1-11ea-92da-64006a8a730f
