@@ -39,3 +39,8 @@
 	url = https://github.com/templateflow/tpl-WHS
 	branch = master
 	datalad-id = 1633db3a-5db1-11ea-92da-64006a8a730f
+[submodule "tpl-MNI152NLin2009cSym"]
+	path = tpl-MNI152NLin2009cSym
+	url = ./tpl-MNI152NLin2009cSym
+	branch = master
+	datalad-id = 0cf19782-78f1-11ea-a06a-64006a8a730f
