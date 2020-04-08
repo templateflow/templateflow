@@ -108,7 +108,8 @@ jobs:
       run: |
         for tpl in $( find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d ); do
           pushd $tpl
+          datalad get -r .
           git annex export master --to public-s3
           popd
-        end;
+        done
     
