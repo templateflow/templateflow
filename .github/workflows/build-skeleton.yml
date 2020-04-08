@@ -23,6 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         conda install git-annex datalad
+        pip install osf
     - name: Pacify DataLad about git config
       run: |
         git config --global user.name "GitHub Action"
@@ -49,3 +50,14 @@ jobs:
       with:
         name: templateflow-skel.md5
         path: /tmp/resources/templateflow-skel.md5
+    - name: Upload skeleton to OSF
+      shell: bash
+      env:
+        OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
+        OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
+      run: |
+        cd /tmp/resources
+        TAG=$( python -c "import os; _, istag, tag = os.getenv('GITHUB_REF', '//'); print(tag if istag == 'ref' else '', end='')" )
+        SHORTSHA=${GITHUB_SHA::8}
+        osf upload -u "$OSF_USERNAME" -p ue5gx templateflow-skel.zip .skel/templateflow-${TAG:-SHORTSHA}.zip
+        osf upload -u "$OSF_USERNAME" -p ue5gx templateflow-skel.md5 .skel/templateflow-${TAG:-SHORTSHA}.md5
