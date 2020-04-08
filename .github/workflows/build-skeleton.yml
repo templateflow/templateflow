@@ -6,6 +6,7 @@ name: Build S3 Skeleton
 on:
   push:
     branches: [ master ]
+    tags: [ '*' ]
 
 jobs:
   build:
@@ -62,5 +63,5 @@ jobs:
         SHORTSHA=${GITHUB_SHA::8}
         FILENAME=templateflow-${TAG:-latest}
         echo "Uploading new skeleton: $FILENAME"
-        osf -u "$OSF_USERNAME" -p ue5gx upload templateflow-skel.zip .skel/${FILENAME}.zip
-        osf -u "$OSF_USERNAME" -p ue5gx upload templateflow-skel.md5 .skel/${FILENAME}.md5
+        osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.zip .skel/${FILENAME}.zip
+        osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
