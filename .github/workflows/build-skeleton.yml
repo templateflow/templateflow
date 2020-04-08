@@ -57,7 +57,7 @@ jobs:
         OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
       run: |
         cd /tmp/resources
-        if [[ "$GITHUB_REF" == ref/tags/* ]]; then
+        if [[ "$GITHUB_REF" == refs/tags/* ]]; then
           TAG=${GITHUB_REF##*/}
         fi
         SHORTSHA=${GITHUB_SHA::8}
