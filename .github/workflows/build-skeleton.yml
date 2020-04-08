@@ -101,3 +101,9 @@ jobs:
         datalad install -r tpl-*/
         find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d \
             -exec datalad siblings -d "{}" enable -s public-s3 \;
+        for tpl in $( find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d ); do
+          pushd $tpl
+          git annex export master --to public-s3
+          popd
+        end
+    
