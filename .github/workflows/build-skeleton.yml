@@ -1,0 +1,39 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Build S3 Skeleton
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: s-weigand/setup-conda@v1
+      with:
+        update-conda: true
+        python-version: 3.7
+        conda-channels: anaconda, conda-forge
+    - name: Install dependencies
+      run: |
+        conda install git-annex datalad
+    - name: Pacify DataLad about git config
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "nipreps@gmail.com"
+    - name: Install all datasets
+      run: |
+        datalad install -r tpl-*/
+        find . -type d -not -path "*/\.*" -exec mkdir -p /tmp/skel/{} \;
+        for i in $( find . -type f -not -path "*/\.*" ); do cp $i /tmp/skel/${i:2}; done
+        find . -type l -not -path "*/\.*" -exec touch /tmp/skel/{} \;
+        cd /tmp/skel
+        mkdir -p /tmp/resources
+        zip -r /tmp/resources/templateflow-skel.zip */
+        find . -type f -exec md5sum {} \; | sort -k 2 | md5sum > /tmp/resources/templateflow-skel.md5
