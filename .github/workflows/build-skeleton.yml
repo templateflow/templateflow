@@ -9,7 +9,7 @@ on:
     tags: [ '*' ]
 
 jobs:
-  build:
+  skeleton:
 
     runs-on: ubuntu-latest
 
@@ -80,3 +80,42 @@ jobs:
         echo "Uploading new skeleton: $FILENAME"
         osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.zip .skel/${FILENAME}.zip
         osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
+
+  export:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v1
+      with:
+        path: /opt/miniconda
+        key: conda-v1
+        restore-keys: |
+          conda-
+    - uses: actions/cache@v1
+      with:
+        path: /usr/share/miniconda
+        key: condaenvs-v1
+        restore-keys: |
+          condaenvs-
+    - name: Setup conda
+      uses: s-weigand/setup-conda@v1
+      env:
+        CONDA: /opt/miniconda
+      with:
+        update-conda: false
+        python-version: 3.7
+        conda-channels: anaconda, conda-forge
+    - name: Install dependencies
+      run: |
+        conda config --set always_yes True
+        conda install git-annex datalad osfclient
+    - name: Pacify DataLad about git config
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "nipreps@gmail.com"
+    - name: Install all datasets
+      run: |
+        datalad install -r -g tpl-*/
+        datalad siblings -d "/home/runner/work/templateflow/templateflow/tpl-*" enable -s public-s3
