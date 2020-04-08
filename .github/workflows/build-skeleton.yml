@@ -114,5 +114,6 @@ jobs:
         git config --global user.email "nipreps@gmail.com"
     - name: Install all datasets
       run: |
-        datalad siblings -d "/home/runner/work/templateflow/templateflow/tpl-*" enable -s public-s3
+        find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d \
+            -exec datalad siblings -d "{}" enable -s public-s3 \;
         datalad install -r -g tpl-*/
