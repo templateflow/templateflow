@@ -30,6 +30,8 @@ jobs:
     - name: Install all datasets
       run: |
         datalad install -r tpl-*/
+    - name: Generate skeleton
+      run: |
         find . -type d -not -path "*/\.*" -exec mkdir -p /tmp/skel/{} \;
         for i in $( find . -type f -not -path "*/\.*" ); do cp $i /tmp/skel/${i:2}; done
         find . -type l -not -path "*/\.*" -exec touch /tmp/skel/{} \;
@@ -37,3 +39,8 @@ jobs:
         mkdir -p /tmp/resources
         zip -r /tmp/resources/templateflow-skel.zip */
         find . -type f -exec md5sum {} \; | sort -k 2 | md5sum > /tmp/resources/templateflow-skel.md5
+    - name: Save new skeleton
+      uses: actions/upload-artifact@v1
+      with:
+        name: skel
+        path: /tmp/resources
