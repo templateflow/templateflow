@@ -15,15 +15,15 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: /opt/miniconda
-        key: conda-v1
+        key: conda-dist-v1
         restore-keys: |
-          conda-
+          conda-dist-
     - uses: actions/cache@v1
       with:
         path: /usr/share/miniconda
-        key: condaenvs-v1
+        key: conda-envs-v1
         restore-keys: |
-          condaenvs-
+          conda-envs-
     - name: Setup conda
       uses: s-weigand/setup-conda@v1
       env:
@@ -87,15 +87,15 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: /opt/miniconda
-        key: conda-v1
+        key: conda-dist-v1
         restore-keys: |
-          conda-
+          conda-dist-
     - uses: actions/cache@v1
       with:
         path: /usr/share/miniconda
-        key: condaenvs-v1
+        key: conda-envs-v1
         restore-keys: |
-          condaenvs-
+          conda-envs-
     - name: Setup conda
       uses: s-weigand/setup-conda@v1
       env:
@@ -114,6 +114,6 @@ jobs:
         git config --global user.email "nipreps@gmail.com"
     - name: Install all datasets
       run: |
+        datalad install -r tpl-*/
         find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d \
             -exec datalad siblings -d "{}" enable -s public-s3 \;
-        datalad install -r -g tpl-*/
