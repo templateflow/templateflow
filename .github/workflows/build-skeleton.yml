@@ -57,7 +57,10 @@ jobs:
         OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
       run: |
         cd /tmp/resources
-        TAG=$( python -c "import os; _, istag, tag = os.getenv('GITHUB_REF', '//'); print(tag if istag == 'ref' else '', end='')" )
+        if [[ "$GITHUB_REF" == ref/tags/* ]]; then
+          TAG=${GITHUB_REF##*/}
+        fi
         SHORTSHA=${GITHUB_SHA::8}
+        echo "Uploading new skell: templateflow-${TAG:-SHORTSHA}"
         osf upload -u "$OSF_USERNAME" -p ue5gx templateflow-skel.zip .skel/templateflow-${TAG:-SHORTSHA}.zip
         osf upload -u "$OSF_USERNAME" -p ue5gx templateflow-skel.md5 .skel/templateflow-${TAG:-SHORTSHA}.md5
