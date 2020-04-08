@@ -30,12 +30,6 @@ jobs:
     - name: Install dependencies
       run: |
         conda install git-annex datalad osfclient
-    - uses: actions/cache@v1
-      with:
-        path: /usr/share/miniconda
-        key: conda-v1
-        restore-keys: |
-          conda-
     - name: Pacify DataLad about git config
       run: |
         git config --global user.name "GitHub Action"
