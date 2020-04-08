@@ -14,20 +14,12 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/cache@v1
       with:
-        path: /opt/miniconda
+        path: /usr/share/miniconda
         key: conda-dist-v1
         restore-keys: |
           conda-dist-
-    - uses: actions/cache@v1
-      with:
-        path: /usr/share/miniconda
-        key: conda-envs-v1
-        restore-keys: |
-          conda-envs-
     - name: Setup conda
       uses: s-weigand/setup-conda@v1
-      env:
-        CONDA: /opt/miniconda
       with:
         update-conda: false
         python-version: 3.7
@@ -86,20 +78,12 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/cache@v1
       with:
-        path: /opt/miniconda
+        path: /usr/share/miniconda
         key: conda-dist-v1
         restore-keys: |
           conda-dist-
-    - uses: actions/cache@v1
-      with:
-        path: /usr/share/miniconda
-        key: conda-envs-v1
-        restore-keys: |
-          conda-envs-
     - name: Setup conda
       uses: s-weigand/setup-conda@v1
-      env:
-        CONDA: /opt/miniconda
       with:
         update-conda: false
         python-version: 3.7
