@@ -61,5 +61,5 @@ jobs:
         fi
         SHORTSHA=${GITHUB_SHA::8}
         echo "Uploading new skeleton: templateflow-${TAG:-$SHORTSHA}"
-        osf upload -u "$OSF_USERNAME" -p ue5gx upload templateflow-skel.zip .skel/templateflow-${TAG:-SHORTSHA}.zip
-        osf upload -u "$OSF_USERNAME" -p ue5gx upload templateflow-skel.md5 .skel/templateflow-${TAG:-SHORTSHA}.md5
+        osf -u "$OSF_USERNAME" -p ue5gx upload templateflow-skel.zip .skel/templateflow-${TAG:-SHORTSHA}.zip
+        osf -u "$OSF_USERNAME" -p ue5gx upload templateflow-skel.md5 .skel/templateflow-${TAG:-SHORTSHA}.md5
