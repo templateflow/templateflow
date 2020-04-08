@@ -1,4 +1,4 @@
-name: Update S3 infrastructure
+name: Update Archive
 
 on:
   push:
@@ -101,3 +101,15 @@ jobs:
         datalad install -r tpl-*/
         find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d \
             -exec datalad siblings -d "{}" enable -s public-s3 \;
+    - name: Export to S3
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        for tpl in $( find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d ); do
+          pushd $tpl
+          datalad get -r .
+          git annex export master --to public-s3
+          popd
+        done
+    
