@@ -20,7 +20,7 @@ jobs:
         path: /usr/share/miniconda
         key: conda-v1
         restore-keys: |
-          conda-v1
+          conda-
     - name: Setup conda
       uses: s-weigand/setup-conda@v1
       with:
@@ -35,7 +35,7 @@ jobs:
         path: /usr/share/miniconda
         key: conda-v1
         restore-keys: |
-          conda-v1
+          conda-
     - name: Pacify DataLad about git config
       run: |
         git config --global user.name "GitHub Action"
