@@ -42,7 +42,7 @@ jobs:
     - name: Save new skeleton
       uses: actions/upload-artifact@v1
       with:
-        name: templateflow-skel.zip
+        name: templateflow-skel
         path: /tmp/resources/templateflow-skel.zip
     - name: Save new skeleton checksum
       uses: actions/upload-artifact@v1
