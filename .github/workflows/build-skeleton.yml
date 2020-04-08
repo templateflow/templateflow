@@ -23,10 +23,10 @@ jobs:
           conda-
     - uses: actions/cache@v1
       with:
-        path: $HOME/.conda/envs
-        key: conda-v1
+        path: ~/.conda/envs
+        key: condaenvs-v1
         restore-keys: |
-          conda-
+          condaenvs-
     - name: Setup conda
       uses: s-weigand/setup-conda@v1
       env:
