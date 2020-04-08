@@ -22,8 +22,7 @@ jobs:
         conda-channels: anaconda, conda-forge
     - name: Install dependencies
       run: |
-        conda install git-annex datalad
-        pip install osf
+        conda install git-annex datalad osfclient
     - name: Pacify DataLad about git config
       run: |
         git config --global user.name "GitHub Action"
@@ -57,7 +56,6 @@ jobs:
         OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
       run: |
         cd /tmp/resources
-        echo "Ref: $GITHUB_REF"
         if [[ "$GITHUB_REF" == refs/tags/* ]]; then
           TAG=${GITHUB_REF##*/}
         fi
