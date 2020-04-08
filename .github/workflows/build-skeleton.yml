@@ -1,7 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
-name: Build S3 Skeleton
+name: Update S3 infrastructure
 
 on:
   push:
@@ -117,5 +114,5 @@ jobs:
         git config --global user.email "nipreps@gmail.com"
     - name: Install all datasets
       run: |
-        datalad install -r -g tpl-*/
         datalad siblings -d "/home/runner/work/templateflow/templateflow/tpl-*" enable -s public-s3
+        datalad install -r -g tpl-*/
