@@ -23,7 +23,7 @@ jobs:
           conda-
     - uses: actions/cache@v1
       with:
-        path: ~/.conda/envs
+        path: /usr/share/miniconda
         key: condaenvs-v1
         restore-keys: |
           condaenvs-
@@ -31,14 +31,11 @@ jobs:
       uses: s-weigand/setup-conda@v1
       env:
         CONDA: /opt/miniconda
-        CONDA_ENVS_PATH: $HOME/.conda/envs
       with:
         update-conda: false
         python-version: 3.7
         conda-channels: anaconda, conda-forge
     - name: Install dependencies
-      env:
-        CONDA_ENVS_PATH: $HOME/.conda/envs
       run: |
         conda config --set always_yes True
         conda install git-annex datalad osfclient
@@ -47,8 +44,6 @@ jobs:
         git config --global user.name "GitHub Action"
         git config --global user.email "nipreps@gmail.com"
     - name: Install all datasets
-      env:
-        CONDA_ENVS_PATH: $HOME/.conda/envs
       run: |
         datalad install -r tpl-*/
     - name: Generate skeleton
@@ -73,7 +68,6 @@ jobs:
     - name: Upload skeleton to OSF
       shell: bash
       env:
-        CONDA_ENVS_PATH: $HOME/.conda/envs
         OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
         OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
       run: |
