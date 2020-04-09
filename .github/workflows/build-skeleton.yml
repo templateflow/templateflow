@@ -78,9 +78,13 @@ jobs:
         ssh-key: "${{ secrets.NIPREPS_DEPLOY }}"
     - name: Update skeleton in Python client
       run: |
+        git config --global user.name "templateflow-bot"
+        git config --global user.email "nipreps@gmail.com"
         cd /home/runner/work/templateflow/templateflow/python-client
         cp /tmp/resources/templateflow-skel.{zip,md5} templateflow/conf/
-        git status
+        git add templateflow/conf/templateflow-skel.{zip,md5}
+        git commit -m "auto: Update S3 skeleton file and checksum [skip ci]"
+        git push origin HEAD:master
         
   export:
 
