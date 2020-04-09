@@ -74,11 +74,11 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: templateflow/python-client
-        path: /home/runner/work/python-client
+        path: /tmp/python-client
     - name: Update skeleton in Python client
       run: |
-        cd /home/runner/work/python-client
-        cp /tmp/resources/templateflow-skel.{zip,md5} /home/runner/work/python-client/templateflow/conf/
+        cd /tmp/python-client
+        cp /tmp/resources/templateflow-skel.{zip,md5} /tmp/python-client/templateflow/conf/
         git status
         
   export:
