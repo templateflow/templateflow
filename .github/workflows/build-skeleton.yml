@@ -75,6 +75,7 @@ jobs:
       with:
         repository: templateflow/python-client
         path: python-client
+        ssh-key: "${{ secrets.NIPREPS_DEPLOY }}"
     - name: Update skeleton in Python client
       run: |
         cd /home/runner/work/templateflow/templateflow/python-client
