@@ -77,7 +77,7 @@ jobs:
         path: python-client
     - name: Update skeleton in Python client
       run: |
-        cd /home/runner/work/templateflow/python-client
+        cd /home/runner/work/templateflow/templateflow/python-client
         cp /tmp/resources/templateflow-skel.{zip,md5} templateflow/conf/
         git status
         
