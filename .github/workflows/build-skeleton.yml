@@ -69,7 +69,18 @@ jobs:
         echo "Uploading new skeleton: $FILENAME"
         osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.zip .skel/${FILENAME}.zip
         osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
-
+        
+    - name: Update skeleton within the Python client
+      uses: actions/checkout@v2
+      with:
+        repository: templateflow/python-client
+        path: ~/python-client
+    - name: Overwrite skeleton
+      run: |
+        cd ~/python-client
+        cp /tmp/resources/templateflow-skel.{zip,md5} ~/python-client/templateflow/conf/
+        git status
+        
   export:
 
     runs-on: ubuntu-latest
@@ -112,4 +123,3 @@ jobs:
           git annex export master --to public-s3
           popd
         done
-    
