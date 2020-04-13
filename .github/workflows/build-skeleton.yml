@@ -85,6 +85,21 @@ jobs:
         git add templateflow/conf/templateflow-skel.{zip,md5}
         git commit -m "auto: Update S3 skeleton file and checksum [skip ci]"
         git push origin HEAD:master
+    - name: Checkout www.templateflow.org
+      uses: actions/checkout@v2
+      with:
+        repository: templateflow/www.templateflow.org
+        path: gh-pages
+        ssh-key: "${{ secrets.NIPREPS_DEPLOY }}"
+    - name: Update skeleton tree for website
+      run: |
+        git config --global user.name "templateflow-bot"
+        git config --global user.email "nipreps@gmail.com"
+        cd /home/runner/work/templateflow/templateflow/gh-pages
+        python gen_tree.py /tmp/resources/templateflow-skel.zip docs/assets/templateflow.json
+        git add docs/assets/templateflow.json
+        git commit -m "auto: Update JSON tree"
+        git push origin HEAD:master
         
   export:
 
