@@ -97,10 +97,11 @@ jobs:
         git config --global user.email "nipreps@gmail.com"
         cd /home/runner/work/templateflow/templateflow/gh-pages
         python gen_tree.py /tmp/resources/templateflow-skel.zip docs/assets/templateflow.json
-        git add docs/assets/templateflow.json
-        git commit -m "auto: Update JSON tree"
-        git push origin HEAD:master
-        
+        if [[ "$( git diff --exit-code )" != "" ]; then
+          git add docs/assets/templateflow.json
+          git commit -m "auto: update JSON tree"
+          git push origin HEAD:master
+        fi
   export:
 
     runs-on: ubuntu-latest
