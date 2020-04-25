@@ -41,8 +41,9 @@ jobs:
           echo "ERROR: too many merged files ($TEMPLATE_ID)."
           exit 1
 
-        OSF_PROJECT=$( python -c "from pathlib import Path; print(Path(\"$TEMPLATE_ID\").read_text().splitlines()[-1].split(\"=\")[-1].strip()) " )
-        echo "Starting intake of ${OSF_PROJECT}/${TEMPLATE_ID}"
+        OSF_PROJECT=$( grep "project =" ${TEMPLATE_ID} | sed 's/^project = //g' )
+
+        echo "Starting intake of ${OSF_PROJECT}/${TEMPLATE_ID%.*}"
         echo ::set-env name=TEMPLATE_ID::"${TEMPLATE_ID%.*}"
         echo ::set-env name=OSF_PROJECT::"${OSF_PROJECT}"
     - name: Fetch data of new template
