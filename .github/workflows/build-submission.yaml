@@ -37,9 +37,11 @@ jobs:
       run: |
         # newtpl=$( git log -m -1 --name-only --pretty="format:" HEAD~1 )
         TEMPLATE_ID=$( git log -m --name-only )
-        n="${TEMPLATE_ID//[^\n]}"; if [ ${#n} -ne 1 ]; then
+        n="${TEMPLATE_ID//[^\n]}"
+        if [ ${#n} -ne 1 ]; then
           echo "ERROR: too many merged files ($TEMPLATE_ID)."
           exit 1
+        fi
 
         OSF_PROJECT=$( grep "project =" ${TEMPLATE_ID} | sed 's/^project = //g' )
 
