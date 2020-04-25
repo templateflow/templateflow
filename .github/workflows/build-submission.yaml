@@ -3,9 +3,10 @@ name: Update Archive
 on:
   push:
     branches: [ tpl-intake ]
+    paths: [ tpl-*.toml ]
 
 jobs:
-  skeleton:
+  intake:
 
     runs-on: ubuntu-latest
 
