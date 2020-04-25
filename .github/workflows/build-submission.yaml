@@ -1,4 +1,4 @@
-name: Update Archive
+name: Start Intake Process
 
 on:
   push:
@@ -35,7 +35,8 @@ jobs:
         git config --global user.email "nipreps@gmail.com"
     - name: Extract the new template ID and OSF project
       run: |
-        newtpl=$( git log -m -1 --name-only --pretty="format:" HEAD~1 )
+        # newtpl=$( git log -m -1 --name-only --pretty="format:" HEAD~1 )
+        newtpl=$( git log -m --name-only )
         n="${newtpl//[^\n]}"; if [ ${#n} -ne 1 ]; then
           echo "ERROR: too many merged files ($newtpl)."
           exit 1
