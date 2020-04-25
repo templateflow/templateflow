@@ -1,0 +1,47 @@
+name: Update Archive
+
+on:
+  push:
+    branches: [ tpl-intake ]
+
+jobs:
+  skeleton:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v1
+      with:
+        path: /usr/share/miniconda
+        key: conda-dist-v1
+        restore-keys: |
+          conda-dist-
+    - name: Setup conda
+      uses: s-weigand/setup-conda@v1
+      with:
+        update-conda: false
+        python-version: 3.7
+        conda-channels: anaconda, conda-forge
+    - name: Install dependencies
+      run: |
+        conda config --set always_yes True
+        conda install git-annex datalad osfclient hub
+        pip install git+https://github.com/templateflow/python-manager.git@master
+    - name: Pacify DataLad about git config
+      run: |
+        git config --global user.name "NiPreps Bot"
+        git config --global user.email "nipreps@gmail.com"
+    - name: Extract the new template ID and OSF project
+      run: |
+        newtpl=$( git log -m -1 --name-only --pretty="format:" HEAD~1 )
+        n="${newtpl//[^\n]}"; if [ ${#n} -ne 1 ]; then
+          echo "ERROR: too many merged files ($newtpl)."
+          exit 1
+
+        echo ::set-env name=TEMPLATE_ID::"${newtpl%.*}"
+        OSF_PROJECT=$( python -c "from pathlib import Path; print(Path(\"$newtpl\").read_text().splitlines()[-1].split("=")[-1].strip()) " )
+        echo ::set-env name=OSF_PROJECT::"${OSF_PROJECT}"
+    - name: Fetch data of new template
+      run: |
+        tfmgr get $TEMPLATE_ID
