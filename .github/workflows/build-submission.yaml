@@ -35,18 +35,18 @@ jobs:
         git config --global user.email "nipreps@gmail.com"
     - name: Extract the new template ID and OSF project
       run: |
-        # newtpl=$( git log -m -1 --name-only --pretty="format:" HEAD~1 )
-        TEMPLATE_ID=$( git log -m --name-only )
-        n="${TEMPLATE_ID//[^\n]}"
-        if [ ${#n} -ne 1 ]; then
-          echo "ERROR: too many merged files ($TEMPLATE_ID)."
+        HEAD_BRANCH=$( git log -m -1 --name-only | grep "Merge pull" | sed 's+^ *Merge pull request #[0-9]* from .*/pr/++g' )
+        if [[ "$HEAD_BRANCH" == "" ]]; then
+          echo "ERROR: could not parse the head branch of merge commit."
           exit 1
         fi
+        echo "Starting intake of ${HEAD_BRANCH}"
+        TEMPLATE_ID=${HEAD_BRANCH#*/}
+        OSF_PROJECT=${HEAD_BRANCH%/*}
 
-        OSF_PROJECT=$( grep "project =" ${TEMPLATE_ID} | sed 's/^project = //g' )
+        # OSF_PROJECT=$( grep "project =" ${HEAD_BRANCH##*/} | sed 's/^project = //g' )
 
-        echo "Starting intake of ${OSF_PROJECT}/${TEMPLATE_ID%.*}"
-        echo ::set-env name=TEMPLATE_ID::"${TEMPLATE_ID%.*}"
+        echo ::set-env name=TEMPLATE_ID::"${TEMPLATE_ID}"
         echo ::set-env name=OSF_PROJECT::"${OSF_PROJECT}"
     - name: Fetch data of new template
       run: |
