@@ -131,8 +131,6 @@ jobs:
     - name: Install all datasets
       run: |
         datalad install -r tpl-*/
-        find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d \
-            -exec datalad siblings -d "{}" enable -s public-s3 \;
     - name: Export to S3
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -141,6 +139,7 @@ jobs:
         for tpl in $( find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d ); do
           pushd $tpl
           datalad get -r .
+          git annex enableremote public-s3 fileprefix=$( basename $PWD )/
           git annex export master --to public-s3
           popd
         done
