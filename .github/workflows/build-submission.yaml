@@ -52,7 +52,11 @@ jobs:
       run: |
         tfmgr get $TEMPLATE_ID
         tfmgr sanitize $TEMPLATE_ID
-    - name:
+    - name: Enable SSH-agent for DataLad submission
+      uses: webfactory/ssh-agent@v0.2.0
+      with:
+          ssh-private-key: ${{ secrets.NIPREPS_DEPLOY }}
+    - name: Push to TemplateFlow's OSF & Create final submission as a PR
       env:
         GITHUB_USER: nipreps-bot
         OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
@@ -69,8 +73,11 @@ jobs:
         cd /tmp/datalad/
         datalad install -r git@github.com:templateflow/templateflow.git
 
-        # Initialize the datalad sub-dataset
+        # Work on a new branch
         cd templateflow/
+        git checkout -b add/${TEMPLATE_ID}
+
+        # Initialize the datalad sub-dataset
         datalad create -d . -D "$( tfmgr metadata ${TEMPLATE_ID} Name )" ${TEMPLATE_ID}
         cd ${TEMPLATE_ID}/
         datalad create-sibling-github --github-organization templateflow --github-login $GITHUB_USER --access-protocol ssh ${TEMPLATE_ID}
@@ -97,3 +104,6 @@ jobs:
 
         # Ready!
         datalad publish
+
+        # Send PR
+        hub pull-request -b templateflow:master -h templateflow:add/${TEMPLATE_ID}
