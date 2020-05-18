@@ -56,8 +56,7 @@ jobs:
       env:
         OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
         OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
-        OSF_PROJECT: ue5gx
       run: |
-        tfmgr upload $TEMPLATE_ID
-        tfmgr geturls $TEMPLATE_ID
+        tfmgr push $TEMPLATE_ID --osf-project ue5gx
+        tfmgr geturls $TEMPLATE_ID --osf-project ue5gx
 
