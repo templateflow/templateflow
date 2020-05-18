@@ -67,6 +67,7 @@ jobs:
         ORIG_FOLDER="$PWD/${TEMPLATE_ID}"
         tfmgr push $TEMPLATE_ID --osf-project ue5gx
         tfmgr geturls $TEMPLATE_ID --osf-project ue5gx --out-csv /tmp/osf.csv
+        TEMPLATE_DESC=$( tfmgr metadata ${TEMPLATE_ID} Name )
 
         # Install templateflow via datalad
         mkdir /tmp/datalad
@@ -78,7 +79,7 @@ jobs:
         git checkout -b add/${TEMPLATE_ID}
 
         # Initialize the datalad sub-dataset
-        datalad create -d . -D "$( tfmgr metadata ${TEMPLATE_ID} Name )" ${TEMPLATE_ID}
+        datalad create -d . -D "${TEMPLATE_DESC}" ${TEMPLATE_ID}
         cd ${TEMPLATE_ID}/
         datalad create-sibling-github --github-organization templateflow --github-login $GITHUB_USER --access-protocol ssh ${TEMPLATE_ID}
         git annex initremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes fileprefix=${TEMPLATE_ID}/
