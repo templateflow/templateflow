@@ -83,7 +83,8 @@ jobs:
         # Install templateflow via datalad
         mkdir /tmp/datalad
         cd /tmp/datalad/
-        datalad install -r git@github.com:templateflow/templateflow.git
+        # datalad install -r git@github.com:templateflow/templateflow.git
+        datalad install -r https://github.com/templateflow/templateflow.git
 
         # Work on a new branch
         cd templateflow/
