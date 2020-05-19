@@ -7,7 +7,7 @@ on:
 
 jobs:
   intake:
-
+    if: "startsWith(github.event.head_commit.message, 'Merge pull request')"
     runs-on: ubuntu-latest
 
     steps:
@@ -33,10 +33,6 @@ jobs:
       run: |
         git config --global user.name "NiPreps Bot"
         git config --global user.email "nipreps@gmail.com"
-        echo '[url "git@github.com:templateflow"]' >> ~/.gitconfig
-        echo '  pushInsteadOf = https://github.com/templateflow/' >> ~/.gitconfig
-        echo '  pushInsteadOf = http://github.com/templateflow/' >> ~/.gitconfig
-        echo '  pushInsteadOf = git://github.com/templateflow/' >> ~/.gitconfig
     - name: Extract the new template ID and OSF project
       run: |
         HEAD_BRANCH=$( git log -m -1 --name-only | grep "Merge pull" | sed 's+^ *Merge pull request #[0-9]* from .*/pr/++g' )
@@ -56,13 +52,18 @@ jobs:
       run: |
         tfmgr get $TEMPLATE_ID
         tfmgr sanitize $TEMPLATE_ID
-    - name: Enable SSH-agent for DataLad submission
-      uses: webfactory/ssh-agent@v0.2.0
-      with:
-          ssh-private-key: ${{ secrets.NIPREPS_DEPLOY }}
+    # - name: Enable SSH-agent for DataLad submission
+    #   uses: webfactory/ssh-agent@v0.2.0
+    #   with:
+    #       ssh-private-key: ${{ secrets.NIPREPS_DEPLOY }}
+    # - name: Config Git to use ssh protocol
+    #   run: |
+    #     git config --global url."git@github.com:".pushInsteadOf "https://github.com/"
+    #     git config --global url."git@github.com:".pushInsteadOf "http://github.com/"
+    #     git config --global url."git@github.com:".pushInsteadOf "git://github.com/"
     - name: Push to TemplateFlow's OSF & Create final submission as a PR
       env:
-        GITHUB_TOKEN: ${{ secrets.NIPREPS_BOT_PAT }}
+        GITHUB_USER: nipreps-bot
         OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
         OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -70,7 +71,9 @@ jobs:
       run: |
         git config --global github.user nipreps-bot
         git config --global github.token ${{ secrets.NIPREPS_BOT_PAT }}
+        git config --global hub.token ${{ secrets.NIPREPS_BOT_PAT }}
         git config --global hub.oauthtoken ${{ secrets.NIPREPS_BOT_PAT }}
+        git config --global hub.protocol https
 
         ORIG_FOLDER="$PWD/${TEMPLATE_ID}"
         tfmgr push $TEMPLATE_ID --osf-project ue5gx
