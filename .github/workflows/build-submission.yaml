@@ -28,6 +28,7 @@ jobs:
       run: |
         conda config --set always_yes True
         conda install git-annex datalad osfclient hub
+        pip install "datalad==0.13.0rc2"
         pip install git+https://github.com/templateflow/python-manager.git@master
     - name: Pacify DataLad about git config
       run: |
