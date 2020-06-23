@@ -95,7 +95,7 @@ jobs:
         # Initialize the datalad sub-dataset
         datalad create -d . -D "${TEMPLATE_DESC}" ${TEMPLATE_ID}
         cd ${TEMPLATE_ID}/
-        datalad create-sibling-github --github-login ${NIPREPS_PAT} --github-organization templateflow ${TEMPLATE_ID}
+        datalad create-sibling-github --github-organization templateflow ${TEMPLATE_ID}
         git annex initremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes versioning=yes fileprefix=${TEMPLATE_ID}/
         datalad save -m "chore: setup GitHub sibling and public-s3 annex-remote"
 
