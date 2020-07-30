@@ -102,7 +102,7 @@ jobs:
         # Add data to new sub-dataset
         datalad addurls /tmp/osf.csv '{link}' '{name}' --message "add(${TEMPLATE_ID}): imaging data by url (OSF)"
         pushd ${ORIG_FOLDER}
-        for f in $ find . -type f ); do
+        for f in $( find . -type f ); do
           dest=/tmp/datalad/${TEMPLATE_ID}/${f}
           if [ ! -f "$dest" ]; then
             cp -n $f /tmp/datalad/${TEMPLATE_ID}/$dest
