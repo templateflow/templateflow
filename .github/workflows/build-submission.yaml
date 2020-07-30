@@ -96,7 +96,8 @@ jobs:
         datalad create -d . -D "${TEMPLATE_DESC}" ${TEMPLATE_ID}
         cd ${TEMPLATE_ID}/
         datalad create-sibling-github --github-organization templateflow ${TEMPLATE_ID}
-        git annex initremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes versioning=yes fileprefix=${TEMPLATE_ID}/
+        git annex initremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes versioning=yes fileprefix="${TEMPLATE_ID}/" autoenable=true
+        datalad siblings configure -s github --publish-by-default github
         datalad save -m "chore: setup GitHub sibling and public-s3 annex-remote"
 
         # Add data to new sub-dataset
@@ -109,8 +110,7 @@ jobs:
             echo $f >> /tmp/togit.txt
         done
         popd
-        datalad add --to-git $( cat /tmp/togit.txt )
-        datalad save -m "add(${TEMPLATE_ID}): metadata to git (GitHub)"
+        datalad add -m "add(${TEMPLATE_ID}): metadata to git (GitHub)" --to-git $( cat /tmp/togit.txt )
 
         # Fixup submodule URL
         cd ..
