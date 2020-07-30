@@ -46,6 +46,6 @@
 	datalad-id = 0cf19782-78f1-11ea-a06a-64006a8a730f
 [submodule "tpl-Fischer344"]
 	path = tpl-Fischer344
-	url = ./tpl-Fischer344
+	url = https://github.com/templateflow/tpl-Fischer344
 	branch = master
 	datalad-id = 16c007e8-d23e-11ea-b389-64006a8a730f
