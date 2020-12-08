@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         conda config --set always_yes True
-        conda install -c conda-forge git-annex datalad osfclient hub
+        conda install git-annex datalad osfclient hub
         pip install git+https://github.com/templateflow/python-manager.git@master
     - name: Pacify DataLad about git config
       run: |
@@ -52,27 +52,20 @@ jobs:
       run: |
         tfmgr get $TEMPLATE_ID
         tfmgr sanitize $TEMPLATE_ID
-    # - name: Enable SSH-agent for DataLad submission
-    #   uses: webfactory/ssh-agent@v0.2.0
-    #   with:
-    #       ssh-private-key: ${{ secrets.NIPREPS_DEPLOY }}
-    # - name: Config Git to use ssh protocol
-    #   run: |
-    #     git config --global url."git@github.com:".pushInsteadOf "https://github.com/"
-    #     git config --global url."git@github.com:".pushInsteadOf "http://github.com/"
-    #     git config --global url."git@github.com:".pushInsteadOf "git://github.com/"
+
     - name: Push to TemplateFlow's OSF & Create final submission as a PR
       env:
         GITHUB_USER: nipreps-bot
+        NIPREPS_PAT: ${{ secrets.NIPREPS_BOT_PAT }}
         OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
         OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        git config --global github.user nipreps-bot
-        git config --global github.token ${{ secrets.NIPREPS_BOT_PAT }}
-        git config --global hub.token ${{ secrets.NIPREPS_BOT_PAT }}
-        git config --global hub.oauthtoken ${{ secrets.NIPREPS_BOT_PAT }}
+        git config --global github.user ${GITHUB_USER}
+        git config --global github.token ${NIPREPS_PAT}
+        git config --global hub.token ${NIPREPS_PAT}
+        git config --global hub.oauthtoken ${NIPREPS_PAT}
         git config --global hub.protocol https
 
         ORIG_FOLDER="$PWD/${TEMPLATE_ID}"
@@ -93,14 +86,15 @@ jobs:
         # Initialize the datalad sub-dataset
         datalad create -c text2git -d . -D "${TEMPLATE_DESC}" ${TEMPLATE_ID}
         cd ${TEMPLATE_ID}/
-        datalad create-sibling-github --github-login ${{ secrets.NIPREPS_BOT_PAT }} --github-organization templateflow -s github ${TEMPLATE_ID}
-        git annex initremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes versioning=yes fileprefix=${TEMPLATE_ID}/
+        datalad create-sibling-github --github-organization templateflow -s github ${TEMPLATE_ID}
+        git annex initremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes versioning=yes fileprefix="${TEMPLATE_ID}/" autoenable=true
+        datalad siblings configure -s github --publish-by-default github
         datalad save -m "chore: setup GitHub sibling and public-s3 annex-remote"
 
         # Add data to new sub-dataset
         datalad addurls /tmp/osf.csv '{link}' '{name}' --message "add(${TEMPLATE_ID}): imaging data by url (OSF)"
         pushd ${ORIG_FOLDER}
-        for f in $ find . -type f ); do
+        for f in $( find . -type f ); do
           dest=/tmp/datalad/${TEMPLATE_ID}/${f}
           if [ ! -f "$dest" ]; then
             cp -n $f /tmp/datalad/${TEMPLATE_ID}/$dest
