@@ -1,4 +1,4 @@
-name: Start Intake Process
+name: Intake
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     paths: [ tpl-*.toml ]
 
 jobs:
-  intake:
+  New-Submission:
     if: "startsWith(github.event.head_commit.message, 'Merge pull request')"
     runs-on: ubuntu-latest
 
@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         conda config --set always_yes True
-        conda install git-annex datalad osfclient hub
+        conda install -c conda-forge git-annex datalad osfclient hub
         pip install git+https://github.com/templateflow/python-manager.git@master
     - name: Pacify DataLad about git config
       run: |
@@ -44,10 +44,10 @@ jobs:
         TEMPLATE_ID=${HEAD_BRANCH#*/}
         OSF_PROJECT=${HEAD_BRANCH%/*}
 
-        # OSF_PROJECT=$( grep "project =" ${HEAD_BRANCH##*/} | sed 's/^project = //g' )
+        # OSF_PROJECT=$( grep "project =" ${HEAD_BRANCH#
 
-        echo ::set-env name=TEMPLATE_ID::"${TEMPLATE_ID}"
-        echo ::set-env name=OSF_PROJECT::"${OSF_PROJECT}"
+        echo "TEMPLATE_ID=${TEMPLATE_ID}" >> ${GITHUB_ENV}
+        echo "OSF_PROJECT=${OSF_PROJECT}" >> ${GITHUB_ENV}
     - name: Fetch data of new template and sanitize
       run: |
         tfmgr get $TEMPLATE_ID
@@ -91,9 +91,9 @@ jobs:
         git checkout -b add/${TEMPLATE_ID}
 
         # Initialize the datalad sub-dataset
-        datalad create -d . -D "${TEMPLATE_DESC}" ${TEMPLATE_ID}
+        datalad create -c text2git -d . -D "${TEMPLATE_DESC}" ${TEMPLATE_ID}
         cd ${TEMPLATE_ID}/
-        datalad create-sibling-github --github-login ${{ secrets.NIPREPS_BOT_PAT }} --github-organization templateflow ${TEMPLATE_ID}
+        datalad create-sibling-github --github-login ${{ secrets.NIPREPS_BOT_PAT }} --github-organization templateflow -s github ${TEMPLATE_ID}
         git annex initremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes versioning=yes fileprefix=${TEMPLATE_ID}/
         datalad save -m "chore: setup GitHub sibling and public-s3 annex-remote"
 
@@ -104,10 +104,8 @@ jobs:
           dest=/tmp/datalad/${TEMPLATE_ID}/${f}
           if [ ! -f "$dest" ]; then
             cp -n $f /tmp/datalad/${TEMPLATE_ID}/$dest
-            echo $f >> /tmp/togit.txt
         done
         popd
-        datalad add --to-git $( cat /tmp/togit.txt )
         datalad save -m "add(${TEMPLATE_ID}): metadata to git (GitHub)"
 
         # Fixup submodule URL
@@ -116,7 +114,7 @@ jobs:
         datalad save -m "fix(submodules): set the github repo url for new template ``$TEMPLATE_ID``"
 
         # Ready!
-        datalad publish -r
+        datalad push -r --to github .
 
         # Send PR
         hub pull-request -b templateflow:master -h templateflow:add/${TEMPLATE_ID}
