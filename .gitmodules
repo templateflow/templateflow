@@ -33,7 +33,8 @@
 	url = https://github.com/templateflow/tpl-MNIInfant
 [submodule "tpl-UNCInfant"]
 	path = tpl-UNCInfant
-	url = https://github.com/templateflow/tpl-UNCInfant
+	url = ./tpl-UNCInfant
+	datalad-id = bfb0027f-1e11-4ebf-9a2b-f89729916131
 [submodule "tpl-WHS"]
 	path = tpl-WHS
 	url = https://github.com/templateflow/tpl-WHS
