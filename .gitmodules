@@ -52,5 +52,5 @@
 	datalad-id = 16c007e8-d23e-11ea-b389-64006a8a730f
 [submodule "tpl-RESILIENT"]
 	path = tpl-RESILIENT
-	url = ./tpl-RESILIENT
+	url = https://github.com/templateflow/tpl-RESILIENT.git
 	datalad-id = d6ccb8c7-2b87-4506-b51c-4bd64d4530a9
