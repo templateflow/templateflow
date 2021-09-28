@@ -1,36 +1,47 @@
 [submodule "tpl-MNI152NLin2009cAsym"]
 	path = tpl-MNI152NLin2009cAsym
 	url = https://github.com/templateflow/tpl-MNI152NLin2009cAsym
+	datalad-id = 5b6cbfac-d23c-11e8-aa11-64006a8a730f
 [submodule "tpl-MNI152Lin"]
 	path = tpl-MNI152Lin
 	url = https://github.com/templateflow/tpl-MNI152Lin
+	datalad-id = 9375ed5c-d36c-11e8-8ca6-64006a8a730f
 [submodule "tpl-NKI"]
 	path = tpl-NKI
 	url = https://github.com/templateflow/tpl-NKI
+	datalad-id = 47d6dd94-006b-11e9-9598-f45c89af84cb
 [submodule "tpl-PNC"]
 	path = tpl-PNC
 	url = https://github.com/templateflow/tpl-PNC
+	datalad-id = 7951b5d2-005d-11e9-af21-f45c89af84cb
 [submodule "tpl-OASIS30ANTs"]
 	path = tpl-OASIS30ANTs
 	url = https://github.com/templateflow/tpl-OASIS30ANTs
+	datalad-id = 531d03b4-006a-11e9-8b4e-f45c89af84cb
 [submodule "tpl-fsaverage"]
 	path = tpl-fsaverage
 	url = https://github.com/templateflow/tpl-fsaverage
+	datalad-id = 22e3d07e-1915-11e9-a3af-64006a8a730f
 [submodule "tpl-fsLR"]
 	path = tpl-fsLR
 	url = https://github.com/templateflow/tpl-fsLR
+	datalad-id = 9781f092-192d-11e9-8fa4-64006a8a730f
 [submodule "tpl-MNI152NLin6Asym"]
 	path = tpl-MNI152NLin6Asym
 	url = https://github.com/templateflow/tpl-MNI152NLin6Asym
+	datalad-id = 39d3b374-51b6-11e9-b40c-64006a8a730f
 [submodule "tpl-MNI152NLin6Sym"]
 	path = tpl-MNI152NLin6Sym
 	url = https://github.com/templateflow/tpl-MNI152NLin6Sym
+	datalad-id = 07c74142-2453-11e9-8322-f45c89af84cb
 [submodule "tpl-MNIPediatricAsym"]
 	path = tpl-MNIPediatricAsym
 	url = https://github.com/templateflow/tpl-MNIPediatricAsym
+	datalad-id = 2b4dd538-8635-11e9-91c7-64006a8a730f
 [submodule "tpl-MNIInfant"]
 	path = tpl-MNIInfant
 	url = https://github.com/templateflow/tpl-MNIInfant
+	datalad-id = 6c083c36-8701-11e9-8d6f-64006a8a730f
 [submodule "tpl-UNCInfant"]
 	path = tpl-UNCInfant
 	url = https://github.com/templateflow/tpl-UNCInfant.git
