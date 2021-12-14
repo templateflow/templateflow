@@ -24,7 +24,6 @@ jobs:
         OSF_PROJECT=${HEAD_BRANCH%/*}
 
         echo "TEMPLATE_ID=${TEMPLATE_ID}" >> ${GITHUB_ENV}
-        echo "OSF_PROJECT=${OSF_PROJECT}" >> ${GITHUB_ENV}
     - name: "Run intake action"
       uses: templateflow/actions-intake@main
       env:
