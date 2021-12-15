@@ -71,5 +71,5 @@
 	datalad-id = 18fd2a52-83a4-45b1-ac46-6f279cff90ec
 [submodule "tpl-MouseIn"]
 	path = tpl-MouseIn
-	url = ./tpl-MouseIn
+	url = https://github.com/templateflow/tpl-MouseIn.git
 	datalad-id = b88615ea-6f4f-430f-b1bb-daa33260ada7
