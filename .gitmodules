@@ -75,5 +75,5 @@
 	datalad-id = b88615ea-6f4f-430f-b1bb-daa33260ada7
 [submodule "tpl-VALiDATe29"]
 	path = tpl-VALiDATe29
-	url = ./tpl-VALiDATe29
+	url = https://github.com/templateflow/tpl-VALiDATe29.git
 	datalad-id = 998dae51-467c-4c19-8c7b-17a0f999a3cc
