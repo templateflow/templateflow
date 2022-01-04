@@ -77,3 +77,7 @@
 	path = tpl-VALiDATe29
 	url = https://github.com/templateflow/tpl-VALiDATe29.git
 	datalad-id = 998dae51-467c-4c19-8c7b-17a0f999a3cc
+[submodule "tpl-MNI305"]
+	path = tpl-MNI305
+	url = https://github.com/templateflow/tpl-MNI305.git
+	datalad-id = bf1bba46-0951-4040-bf0b-dcde0532612c
