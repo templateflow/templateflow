@@ -1,6 +1,7 @@
 ## *TemplateFlow Archive*
 
 [![RRID:SCR_021876](https://img.shields.io/badge/RRID-SCR__021876-blue)](https://scicrunch.org/resources/Any/record/nlx_144509-1/SCR_021876/resolver?q=templateflow&l=templateflow)
+[![Update Archive](https://github.com/templateflow/templateflow/actions/workflows/build-skeleton.yml/badge.svg)](https://github.com/templateflow/templateflow/actions/workflows/build-skeleton.yml)
 
 This repository corresponds to the [DataLad](https://datalad.org) super-dataset of the *TemplateFlow* infrastructure.
 Therefore, this repository indexes actual template datasets (Git repositories), that are linked as Git submodules.
