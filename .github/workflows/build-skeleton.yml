@@ -139,7 +139,7 @@ jobs:
         for tpl in $( find /home/runner/work/templateflow/templateflow/ -maxdepth 1 -name "tpl-*" -type d ); do
           pushd $tpl
           datalad get -r .
-          git annex enableremote public-s3 fileprefix=$( basename $PWD )/
+          git annex enableremote public-s3 type=S3 encryption=none public=yes bucket=templateflow exporttree=yes versioning=yes fileprefix="$( basename $PWD )/" autoenable=true
           git annex export master --to public-s3
           popd
         done
