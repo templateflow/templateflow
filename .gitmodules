@@ -93,3 +93,5 @@
 	path = tpl-MNI152NLin2009aSym
 	url = https://github.com/templateflow/tpl-MNI152NLin2009aSym.git
 	datalad-id = 8285d24d-586e-4d94-9cbe-d45ab9ed6df5
+[submodule "tpl-MNI152NLin2009bSym"]
+	url = git@github.com:templateflow/tpl-MNI152NLin2009bSym.git
