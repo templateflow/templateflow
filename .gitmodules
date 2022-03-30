@@ -98,4 +98,6 @@
 	url = https://github.com/templateflow/tpl-MNI152NLin2009bSym.git
 	datalad-id = 5cf02050-567a-46e0-be71-edc2dc2ea605
 [submodule "tpl-MNI152NLin2009bAsym"]
-	url = https://github.com/templateflow/tpl-MNI152NLin2009bAsym
+	path = tpl-MNI152NLin2009bAsym
+	url = https://github.com/templateflow/tpl-MNI152NLin2009bAsym.git
+	datalad-id = f8574711-19f1-4e8c-8d87-2cf96c8da515
