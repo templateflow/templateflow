@@ -27,7 +27,7 @@ jobs:
     - name: "Run intake action"
       uses: templateflow/actions-intake@main
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.NIPREPS_BOT }}
+        SSH_PRIVATE_KEY: ${{ secrets.NIPREPS_BOT_SSH_KEY }}
         GITHUB_USER: nipreps-bot
         GITHUB_TOKEN: ${{ secrets.NIPREPS_BOT_PAT }}
         DATALAD_github_token: ${{ secrets.NIPREPS_BOT_PAT }}
