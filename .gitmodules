@@ -83,7 +83,7 @@
 	datalad-id = bf1bba46-0951-4040-bf0b-dcde0532612c
 [submodule "tpl-MNIColin27"]
 	path = tpl-MNIColin27
-	url = https://github.com/templateflow/tpl-MNIColin27.git
+	url = https://github.com/templateflow/tpl-MNIColin27
 	datalad-id = d1bd584c-6126-401d-9b44-e6e87d7c41b4
 [submodule "tpl-MNI152NLin2009aAsym"]
 	path = tpl-MNI152NLin2009aAsym
