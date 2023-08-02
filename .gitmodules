@@ -105,5 +105,5 @@
 	url = https://github.com/templateflow/tpl-onavg
 [submodule "tpl-onavg"]
 	path = tpl-onavg
-	url = ./tpl-onavg
+	url = https://github.com/templateflow/tpl-onavg.git
 	datalad-id = 62e3c4d0-fcc6-4cac-8652-6569ddb12037
