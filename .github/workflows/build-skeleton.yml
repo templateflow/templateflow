@@ -57,8 +57,8 @@ jobs:
     - name: Upload skeleton to OSF
       shell: bash
       env:
-        OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
-        OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
+        OSF_TOKEN: ${{ secrets.TOKEN }}
+        OSF_PROJECT: ue5gx
       run: |
         cd /tmp/resources
         if [[ "$GITHUB_REF" == refs/tags/* ]]; then
@@ -67,8 +67,8 @@ jobs:
         SHORTSHA=${GITHUB_SHA::8}
         FILENAME=templateflow-${TAG:-latest}
         echo "Uploading new skeleton: $FILENAME"
-        osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.zip .skel/${FILENAME}.zip
-        osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
+        osf -p ${OSF_PROJECT} upload -f templateflow-skel.zip .skel/${FILENAME}.zip
+        osf -p ${OSF_PROJECT} upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
         
     - name: Checkout the Python client
       uses: actions/checkout@v2
