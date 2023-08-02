@@ -101,3 +101,5 @@
 	path = tpl-MNI152NLin2009bAsym
 	url = https://github.com/templateflow/tpl-MNI152NLin2009bAsym.git
 	datalad-id = f8574711-19f1-4e8c-8d87-2cf96c8da515
+[submodule "tpl-onavg"]
+	url = git@github.com:templateflow/tpl-onavg.git
