@@ -57,7 +57,7 @@ jobs:
     - name: Upload skeleton to OSF
       shell: bash
       env:
-        OSF_TOKEN: ${{ secrets.TOKEN }}
+        OSF_TOKEN: ${{ secrets.OSF_TOKEN }}
         OSF_PROJECT: ue5gx
       run: |
         cd /tmp/resources
