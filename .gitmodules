@@ -103,3 +103,7 @@
 	datalad-id = f8574711-19f1-4e8c-8d87-2cf96c8da515
 [submodule "tpl-onavg"]
 	url = https://github.com/templateflow/tpl-onavg
+[submodule "tpl-onavg"]
+	path = tpl-onavg
+	url = ./tpl-onavg
+	datalad-id = 4fcbb70f-7e3c-4dce-a540-a040ff1aff21
