@@ -107,3 +107,7 @@
 	path = tpl-onavg
 	url = https://github.com/templateflow/tpl-onavg.git
 	datalad-id = 4fcbb70f-7e3c-4dce-a540-a040ff1aff21
+[submodule "tpl-dhcpSym"]
+	path = tpl-dhcpSym
+	url = ./tpl-dhcpSym
+	datalad-id = ce3482de-14c3-46c5-abbd-fab661eaaaa8
