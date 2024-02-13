@@ -113,5 +113,5 @@
 	datalad-id = fdd36de7-c7cf-418c-aca7-53386a12586f
 [submodule "tpl-dhcpSym"]
 	path = tpl-dhcpSym
-	url = https://github.com/templateflow/tpl-dhcpSym.git
+	url = https://github.com/templateflow/tpl-dhcpSym
 	datalad-id = ce3482de-14c3-46c5-abbd-fab661eaaaa8
