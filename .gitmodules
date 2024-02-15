@@ -116,4 +116,6 @@
 	url = https://github.com/templateflow/tpl-dhcpSym
 	datalad-id = ce3482de-14c3-46c5-abbd-fab661eaaaa8
 [submodule "tpl-dhcpVol"]
+	path = tpl-dhcpVol
 	url = https://github.com/templateflow/tpl-dhcpVol
+	datalad-id = 6afe6b51-0d68-4e24-9ce7-1849f9a787dd
