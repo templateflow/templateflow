@@ -119,5 +119,5 @@
 	datalad-id = 6afe6b51-0d68-4e24-9ce7-1849f9a787dd
 [submodule "tpl-SUIT"]
 	path = tpl-SUIT
-	url = https://github.com/templateflow/tpl-SUIT.git
+	url = https://github.com/templateflow/tpl-SUIT
 	datalad-id = 79f211ac-6f82-462b-9ca7-00d4799d7b6e
