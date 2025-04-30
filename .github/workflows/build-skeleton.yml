@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - uses: actions/cache@v4
       with:
         path: /usr/share/miniconda
@@ -45,12 +45,12 @@ jobs:
         zip -r /tmp/resources/templateflow-skel.zip */
         find . -type f -exec md5sum {} \; | sort -k 2 | md5sum > /tmp/resources/templateflow-skel.md5
     - name: Save new skeleton
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: templateflow-skel
         path: /tmp/resources/templateflow-skel.zip
     - name: Save new skeleton checksum
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: templateflow-skel.md5
         path: /tmp/resources/templateflow-skel.md5
@@ -71,7 +71,7 @@ jobs:
         osf -p ${OSF_PROJECT} upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
         
     - name: Checkout the Python client
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: templateflow/python-client
         path: python-client
@@ -86,7 +86,7 @@ jobs:
         git commit -m "auto: Update S3 skeleton file and checksum [skip ci]"
         git push origin HEAD:master
     - name: Checkout www.templateflow.org
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: templateflow/www.templateflow.org
         path: gh-pages
