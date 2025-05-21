@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+- name: TemplateFlow Online Browser
+  url: https://www.templateflow.org/browse/
+  about: View available templates online.
+- name: TemplateFlow Python Client Issues
+  url: https://github.com/templateflow/python-client/issues
+  about: Visit if you are encountering issues related to the TemplateFlow Python client.
