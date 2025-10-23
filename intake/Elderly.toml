@@ -1,0 +1,8 @@
+template = "Elderly"
+license = "CC-BY-4.0"
+authors = ["Kazumichi Ota","Yoshihiko Nakazato","Genko Oyama"]
+github = "https://github.com/KazumichiOta/tpl-Elderly"
+osf = "k9axq"
+resolutions = ["01"]
+links = { paper = "https://doi.org/10.1016/j/neuroimage.2025.121473" }
+cohorts = []
