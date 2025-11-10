@@ -1,4 +1,2 @@
-template    = "tpl-Elderly"
-osf         = "k9axq"
-github      = "https://github.com/KazumichiOta/tpl-Elderly"
-resolutions = ["01"]
+[github]
+user = "KazumichiOta"
