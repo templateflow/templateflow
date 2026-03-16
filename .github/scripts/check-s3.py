@@ -100,6 +100,7 @@ async def main_async(submodules):
 
     if issues:
         print()
+        error_lines = []
         for name, file_path, status, url in sorted(issues):
             full_path = f'{name}/{file_path}'
             msg = {
@@ -110,12 +111,19 @@ async def main_async(submodules):
             }[status]
             if os.environ.get('GITHUB_ACTIONS') == 'true':
                 print(f'::error file={full_path}::{msg}')
+                error_lines.append(f'- `{full_path}`: {msg}')
             else:
                 print(f'  [ERROR] {full_path}: {msg}')
 
+        output_file = os.environ.get('GITHUB_OUTPUT')
+        if output_file:
+            with open(output_file, 'a') as f:
+                f.write('errors<<EOF\n')
+                f.write('\n'.join(error_lines) + '\n')
+                f.write('EOF\n')
+
     print(f'\nDone. {errors} error(s) found.')
     return errors
-
 
 def main():
     submodules = get_submodules()
