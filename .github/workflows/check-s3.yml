@@ -1,0 +1,76 @@
+name: Check and verify files are available on S3
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ '*' ]
+  schedule:
+    - cron: '0 9 * * 0'  # Every Sunday at 9 AM UTC
+  workflow_dispatch:
+
+jobs:
+  verify_s3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+      - name: Install tools
+        run: |
+          uv tool install git-annex
+          uv tool install datalad
+      - name: git identification
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "nipreps@gmail.com"
+      - name: Install all datasets
+        run: uvx datalad install -r .
+      - name: Check S3 files
+        id: s3check
+        run: uv run .github/scripts/check-s3.py
+        env:
+          CONCURRENT_REQUESTS: 50
+      - name: Open issue on S3 errors
+        if: failure() && steps.s3check.outcome == 'failure'
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = `S3 availability check failed (${new Date().toISOString().slice(0, 10)})`;
+
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 's3-check',
+            });
+
+            const duplicate = existing.find(i => i.title === title);
+            if (duplicate) {
+              core.info(`Issue already exists: ${duplicate.html_url}`);
+              return;
+            }
+
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const formatted = `${{ steps.s3check.outputs.errors }}`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: [
+                '## S3 File Availability Check Failed',
+                '',
+                `See the [failed workflow run](${runUrl}) for full details.`,
+                '',
+                '### Affected files',
+                '',
+                formatted,
+                '',
+                '_This issue was opened automatically by the check S3 workflow._',
+              ].join('\n'),
+              labels: ['s3'],
+            });
