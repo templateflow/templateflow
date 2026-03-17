@@ -2,6 +2,8 @@ name: Update Archive
 
 on:
   push:
+    paths-ignore:
+      - '.github/**'
     branches: [ master ]
     tags: [ '*' ]
 
@@ -69,7 +71,7 @@ jobs:
         echo "Uploading new skeleton: $FILENAME"
         osf -p ${OSF_PROJECT} upload -f templateflow-skel.zip .skel/${FILENAME}.zip
         osf -p ${OSF_PROJECT} upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
-        
+
     - name: Checkout the Python client
       uses: actions/checkout@v4
       with:
