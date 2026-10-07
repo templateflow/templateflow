@@ -101,3 +101,23 @@
 	path = tpl-MNI152NLin2009bAsym
 	url = https://github.com/templateflow/tpl-MNI152NLin2009bAsym.git
 	datalad-id = f8574711-19f1-4e8c-8d87-2cf96c8da515
+[submodule "tpl-onavg"]
+	path = tpl-onavg
+	url = https://github.com/templateflow/tpl-onavg
+	datalad-id = 4fcbb70f-7e3c-4dce-a540-a040ff1aff21
+[submodule "tpl-dhcpAsym"]
+	path = tpl-dhcpAsym
+	url = https://github.com/templateflow/tpl-dhcpAsym
+	datalad-id = fdd36de7-c7cf-418c-aca7-53386a12586f
+[submodule "tpl-dhcpSym"]
+	path = tpl-dhcpSym
+	url = https://github.com/templateflow/tpl-dhcpSym
+	datalad-id = ce3482de-14c3-46c5-abbd-fab661eaaaa8
+[submodule "tpl-dhcpVol"]
+	path = tpl-dhcpVol
+	url = https://github.com/templateflow/tpl-dhcpVol
+	datalad-id = 6afe6b51-0d68-4e24-9ce7-1849f9a787dd
+[submodule "tpl-SUIT"]
+	path = tpl-SUIT
+	url = https://github.com/templateflow/tpl-SUIT
+	datalad-id = 79f211ac-6f82-462b-9ca7-00d4799d7b6e

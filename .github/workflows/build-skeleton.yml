@@ -2,6 +2,8 @@ name: Update Archive
 
 on:
   push:
+    paths-ignore:
+      - '.github/**'
     branches: [ master ]
     tags: [ '*' ]
 
@@ -11,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v1
+    - uses: actions/checkout@v4
+    - uses: actions/cache@v4
       with:
         path: /usr/share/miniconda
         key: conda-dist-v1
@@ -22,7 +24,7 @@ jobs:
       uses: s-weigand/setup-conda@v1
       with:
         update-conda: false
-        python-version: 3.7
+        python-version: 3.8
         conda-channels: anaconda, conda-forge
     - name: Install dependencies
       run: |
@@ -45,20 +47,20 @@ jobs:
         zip -r /tmp/resources/templateflow-skel.zip */
         find . -type f -exec md5sum {} \; | sort -k 2 | md5sum > /tmp/resources/templateflow-skel.md5
     - name: Save new skeleton
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: templateflow-skel
         path: /tmp/resources/templateflow-skel.zip
     - name: Save new skeleton checksum
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: templateflow-skel.md5
         path: /tmp/resources/templateflow-skel.md5
     - name: Upload skeleton to OSF
       shell: bash
       env:
-        OSF_PASSWORD: ${{ secrets.OSF_PASSWORD }}
-        OSF_USERNAME: ${{ secrets.OSF_USERNAME }}
+        OSF_TOKEN: ${{ secrets.OSF_TOKEN }}
+        OSF_PROJECT: ue5gx
       run: |
         cd /tmp/resources
         if [[ "$GITHUB_REF" == refs/tags/* ]]; then
@@ -67,11 +69,11 @@ jobs:
         SHORTSHA=${GITHUB_SHA::8}
         FILENAME=templateflow-${TAG:-latest}
         echo "Uploading new skeleton: $FILENAME"
-        osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.zip .skel/${FILENAME}.zip
-        osf -u "$OSF_USERNAME" -p ue5gx upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
-        
+        osf -p ${OSF_PROJECT} upload -f templateflow-skel.zip .skel/${FILENAME}.zip
+        osf -p ${OSF_PROJECT} upload -f templateflow-skel.md5 .skel/${FILENAME}.md5
+
     - name: Checkout the Python client
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: templateflow/python-client
         path: python-client
@@ -86,7 +88,7 @@ jobs:
         git commit -m "auto: Update S3 skeleton file and checksum [skip ci]"
         git push origin HEAD:master
     - name: Checkout www.templateflow.org
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: templateflow/www.templateflow.org
         path: gh-pages

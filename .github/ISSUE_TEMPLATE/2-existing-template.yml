@@ -1,0 +1,22 @@
+name: Existing Template
+description: Report an error or request additional files for an existing template.
+labels: [ "existing-template" ]
+body:
+- type: input
+  id: template-id
+  attributes:
+    label: Which template does this issue concern?
+    description: Please use the TemplateFlow ID (e.g., `tpl-MNI152NLin2009cAsym`)
+    placeholder: tpl-
+  validations:
+    required: true
+- type: textarea
+  id: problem
+  attributes:
+    label: Is there a problem with this template?
+    description: Please describe the problem in detail.
+- type: textarea
+  id: missing
+  attributes:
+    label: Are there any files missing from this template?
+    description: If so, please add a link and a list of the files you would like to see added.

@@ -1,0 +1,51 @@
+name: New Template
+description: Request a new template.
+labels: [ "new-template" ]
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thank you for using TemplateFlow! This is a community-driven project, and we welcome any contibutions!
+
+      To speed up the process of adding new template, we have written [guidelines](https://www.templateflow.org/contributing/submission/) that walk users through a new template submission to the archive.
+      Please take a look to see if this is something you would be interested in doing.
+- type: dropdown
+  id: assignment
+  attributes:
+    label: Will you contribute this template to TemplateFlow?
+    options:
+    - "Yes"
+    - "No"
+  validations:
+    required: true
+- type: textarea
+  id: template-id
+  attributes:
+    label: What is the requested template?
+    description: Please include a link to the template.
+  validations:
+    required: true
+- type: dropdown
+  id: author
+  attributes:
+    label: Are you the author of this template?
+    options:
+    - "Yes"
+    - "No"
+  validations:
+    required: true
+- type: dropdown
+  id: license
+  attributes:
+    label: Does this template include license information?
+    description: Without license information or explicit author approval, we cannot add this template to TemplateFlow.
+    options:
+    - "Yes"
+    - "No"
+  validations:
+    required: true
+- type: textarea
+  id: extra
+  attributes:
+    label: Additional Information
+    description: Please include any questions you may have about the submission process.
